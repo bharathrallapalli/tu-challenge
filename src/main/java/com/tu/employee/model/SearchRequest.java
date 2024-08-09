@@ -17,7 +17,7 @@ public class SearchRequest {
     String title;
 
     @NotNull(message = "age can't be null or blank")
-    @Min(value = 18, message = "age should be in between 18 and 65")
-    @Max(value = 65, message = "age should be in between 18 and 65")
+    @Min(value = 18, message = "age should be in between 18 and 100")
+    @Max(value = 65, message = "age should be in between 18 and 100")
     int age;
 }

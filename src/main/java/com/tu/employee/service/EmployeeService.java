@@ -71,8 +71,8 @@ public class EmployeeService {
     private void validateDOB(CreateRequest request) {
         if (!request.getDateOfBirth().isBefore(LocalDate.now().minusYears(18))) {
             throw new IllegalArgumentException("Age should be at least 18");
-        } else if(!request.getDateOfBirth().isAfter(LocalDate.now().minusYears(65))) {
-            throw new IllegalArgumentException("Age should not be more than 65");
+        } else if(!request.getDateOfBirth().isAfter(LocalDate.now().minusYears(100))) {
+            throw new IllegalArgumentException("Age should not be more than 100");
         }
     }
 
