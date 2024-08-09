@@ -1,2 +1,3 @@
-LOG_FILE="/Users/bharathkumar/Downloads/employee-service/log/log-2024-08-09.log"
+date=$(date '+%Y-%m-%d')
+LOG_FILE="./log/log-${date}.log"
 tail -n0 -F "$LOG_FILE" | nc -c localhost 50000

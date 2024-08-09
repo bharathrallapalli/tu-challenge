@@ -23,5 +23,13 @@ class EmployeeServiceTest(HttpUser):
                    "dateOfBirth": fake.date_of_birth().isoformat(), 
                    "title":fake.job(), "sin":re.sub("\D","",fake.ssn())
                    }
-        print(request)
         self.client.put("/employee", json=request,headers={"Request-Id": str(uuid.uuid4())})
+        
+    @task
+    def find_paginated_employee(self):
+        self.client.get("/employee/paginated?offset=3&pageSize=10", headers={"Request-Id": str(uuid.uuid4())})
+
+    @task
+    def delete_employee(self):
+        self.client.get("/employee/paginated?offset=3&pageSize=10", headers={"Request-Id": str(uuid.uuid4())})
+

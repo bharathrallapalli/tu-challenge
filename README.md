@@ -40,6 +40,9 @@ http://localhost:8080/swagger-ui/index.html
 - Logstash tails the logs and sends the data to Elasticsearch
 - Kibana reads the data from Elasticsearch, I created a simple dashboard using the log data to show number of create 
   requests and failures
+- After ELK is running in docker, run below command from a terminal in root project folder
+  - `./tail-logs.sh` to tail logs over TCP to logstash
+  
 - ![Alt-Test](./img/kibana-dashboard.png)
 
 ## Load Test
