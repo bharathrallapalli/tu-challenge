@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-        <pattern>[%-5level] %d{HH:mm:ss.SSS} [%.6thread] %logger - %X{request.id} %msg%n</pattern>
-        <charset>UTF-8</charset>
-    </encoder>
-</appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%-5level] %d{HH:mm:ss.SSS} [%.6thread] %logger - %X{request.id} %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
-<appender name="FILEOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${MY_HOME}/${LOG_FILE}.log</file>
-    <append>true</append>
-    <!-- Support multiple-JVM writing to the same log file -->
-    <prudent>true</prudent>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-        <!-- Daily rollover -->
-        <fileNamePattern>/Users/bharathkumar/Downloads/employee-service/log/log-%d{yyyy-MM-dd}.log</fileNamePattern>
-        <!-- Keep 7 days' worth of history -->
-        <maxHistory>7</maxHistory>
-    </rollingPolicy>
-    <encoder>
-        <pattern>[%-5level] %d{HH:mm:ss.SSS} [%.6thread] %logger - %X{request.id} %msg%n</pattern>
-        <charset>UTF-8</charset>
-    </encoder>
-</appender>
+    <appender name="FILEOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MY_HOME}/${LOG_FILE}.log</file>
+        <append>true</append>
+        <!-- Support multiple-JVM writing to the same log file -->
+        <prudent>true</prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Daily rollover -->
+            <fileNamePattern>/Users/bharathkumar/Downloads/employee-service/log/log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Keep 7 days' worth of history -->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%-5level] %d{HH:mm:ss.SSS} [%.6thread] %logger - %X{request.id} %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
-<root level="INFO">
-    <appender-ref ref="STDOUT"/>
-    <appender-ref ref="FILEOUT"/>
-</root>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILEOUT"/>
+    </root>
 </configuration>

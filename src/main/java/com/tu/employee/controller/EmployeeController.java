@@ -5,9 +5,6 @@ import com.tu.employee.model.CreateRequest;
 import com.tu.employee.model.SearchRequest;
 import com.tu.employee.service.EmployeeService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.UUID;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +22,7 @@ public class EmployeeController {
 
     @PutMapping
     ResponseEntity<Employee> createEmployee(@Valid @RequestBody CreateRequest request) {
-        var employee =  employeeService.createEmployee(request);
+        var employee = employeeService.createEmployee(request);
         return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
 

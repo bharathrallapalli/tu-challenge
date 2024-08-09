@@ -35,7 +35,7 @@ public class EmployeeService {
                 .title(request.getTitle())
                 .sin(getLast4Digits(request.getSin())).build();
 
-        var createdEmployee =  employeeRepository.save(employee);
+        var createdEmployee = employeeRepository.save(employee);
         log.info("Created employee with id: {}", createdEmployee.getEmployeeId());
         return createdEmployee;
     }
@@ -57,13 +57,13 @@ public class EmployeeService {
     private void validateDuplicate(CreateRequest request) {
         var existing = employeeRepository.findByPhoneNumberAndNameOrSin
                 (request.getPhoneNumber(), request.getName(), getLast4Digits(request.getSin()));
-        if(!existing.isEmpty()) {
+        if (!existing.isEmpty()) {
             throw new IllegalArgumentException("Duplicate Request");
         }
     }
 
     private void validateDOB(CreateRequest request) {
-        if(!request.getDateOfBirth().isBefore(LocalDate.now().minusYears(18))) {
+        if (!request.getDateOfBirth().isBefore(LocalDate.now().minusYears(18))) {
             throw new IllegalArgumentException("Age should be at least 18");
         }
     }

@@ -11,7 +11,7 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("Request received for path: {}, method: {}", request.getRequestURI(), request.getMethod());
-        if(request.getHeader("Request-Id") == null) {
+        if (request.getHeader("Request-Id") == null) {
             throw new IllegalArgumentException("Request-Id header is missing");
         }
         MDC.put("request.id", request.getHeader("Request-Id"));

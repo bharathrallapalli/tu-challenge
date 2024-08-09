@@ -134,7 +134,7 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$.name", Matchers.is("Bharath")))
                 .andExpect(jsonPath("$.address", Matchers.is("1502- 15 Michael Power Pl, Etobicoke, ON, M9A5G4")))
                 .andExpect(jsonPath("$.phoneNumber", Matchers.is("6472223282")))
-                    .andExpect(jsonPath("$.dateOfBirth", Matchers.is("1991-03-11")))
+                .andExpect(jsonPath("$.dateOfBirth", Matchers.is("1991-03-11")))
                 .andExpect(jsonPath("$.title", Matchers.is("Lead Software Engineer")))
                 .andExpect(jsonPath("$.sin", Matchers.is("6789")))
                 .andExpect(jsonPath("$.employeeId", Matchers.is(1)));
