@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.tu</groupId>
     <artifactId>employee-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>employee-service</name>
     <description>TU challenge test service</description>
     <url/>
