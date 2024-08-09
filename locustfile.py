@@ -6,6 +6,7 @@ from faker.providers import phone_number
 from faker.providers import ssn
 from faker.providers import profile
 from faker.providers import job
+import re
 fake = Faker()
 fake.add_provider(address)
 fake.add_provider(phone_number)
@@ -18,9 +19,9 @@ class EmployeeServiceTest(HttpUser):
     def create_employee(self):
         request = {"name": fake.name(), 
                    "address": str(fake.address()), 
-                   "phoneNumber": fake.phone_number().replace(".",""), 
+                   "phoneNumber": re.sub("\D","",fake.basic_phone_number()), 
                    "dateOfBirth": fake.date_of_birth().isoformat(), 
-                   "title":fake.job(), "sin":fake.ssn().replace("-","")
+                   "title":fake.job(), "sin":re.sub("\D","",fake.ssn())
                    }
         print(request)
         self.client.put("/employee", json=request,headers={"Request-Id": str(uuid.uuid4())})

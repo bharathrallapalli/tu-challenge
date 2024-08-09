@@ -5,6 +5,8 @@ import com.tu.employee.data.repository.EmployeeRepository;
 import com.tu.employee.model.CreateRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -40,6 +42,10 @@ public class EmployeeService {
         return createdEmployee;
     }
 
+    public Page<Employee> getEmployeesByPage(PageRequest pageRequest) {
+        return employeeRepository.findAll(pageRequest);
+    }
+
     public void deleteEmployee(long id) {
         var employee = employeeRepository.findById(id);
         employeeRepository.delete(employee.orElseThrow(() -> new IllegalArgumentException("id not found")));
@@ -65,6 +71,8 @@ public class EmployeeService {
     private void validateDOB(CreateRequest request) {
         if (!request.getDateOfBirth().isBefore(LocalDate.now().minusYears(18))) {
             throw new IllegalArgumentException("Age should be at least 18");
+        } else if(!request.getDateOfBirth().isAfter(LocalDate.now().minusYears(65))) {
+            throw new IllegalArgumentException("Age should not be more than 65");
         }
     }
 

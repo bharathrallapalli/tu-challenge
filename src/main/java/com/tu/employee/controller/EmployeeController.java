@@ -6,8 +6,12 @@ import com.tu.employee.model.SearchRequest;
 import com.tu.employee.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +33,15 @@ public class EmployeeController {
     @GetMapping("/all")
     List<Employee> findAll() {
         return employeeService.findAll();
+    }
+
+    @GetMapping("/paginated")
+    Page<Employee> findAll(@RequestParam(value = "offset", required = false) Integer offset,
+                           @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        if(null == offset) offset = 0;
+        if(null == pageSize) pageSize = 10;
+
+        return employeeService.getEmployeesByPage(PageRequest.of(offset, pageSize, Sort.by("employeeId")));
     }
 
     @GetMapping("/search")
