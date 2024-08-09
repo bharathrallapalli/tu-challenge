@@ -1,22 +1,24 @@
 # Employee Service
 
 ## Tech Stack
-    - Java 17
-    - Springboot
-    - Junit 5
-    - Locust (Load Testing)
-    - ELK (Elastic+Logstash+Kibana - Logging and Dashboards)
+- Java 17
+- Springboot
+- PostgreSQL
+- Junit 5
+- Locust (Load Testing)
+- ELK (Elastic+Logstash+Kibana - Logging and Dashboards)
 
 ## Features
-    - Create an employee with
-        - Name
-        - DOB
-        - Address
-        - Phone Number
-        - SIN
-        - Title
-    - Find all employees
-    - Search for an employee based on Age and Title
+- Create an employee with
+    - Name
+    - DOB
+    - Address
+    - Phone Number
+    - SIN
+    - Title
+    - Assign an auto generated employee id upon insertion
+- Find all employees
+- Search for an employee based on Age and Title
 I added some more endpoints while testing the solution like delete, deleteAll, findByPaginated. I can talk about 
 them in detail in the interview
 
