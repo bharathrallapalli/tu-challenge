@@ -23,8 +23,11 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public List<Employee> findEmployeesByAgeAndTitle(String title, int age) {
-        return employeeRepository.findByAgeAndTitle(title, age);
+    public List<Employee> findEmployeesByAgeAndTitle(String title, int age, boolean ignoreCase) {
+        if(!ignoreCase) {
+            return employeeRepository.findByAgeAndTitle(title, age);
+        }
+        return employeeRepository.findByAgeAndTitleIgnoreCase(title, age);
     }
 
     public Employee createEmployee(CreateRequest request) {
@@ -53,6 +56,11 @@ public class EmployeeService {
 
     public void deleteAll() {
         employeeRepository.deleteAll();
+    }
+
+    public void deleteSome(int size) {
+        var employees = getEmployeesByPage(PageRequest.of(1, size));
+        employeeRepository.deleteAll(employees);
     }
 
     private void validateRequest(CreateRequest request) {

@@ -2,16 +2,18 @@ package com.tu.employee.controller;
 
 import com.tu.employee.data.entity.Employee;
 import com.tu.employee.model.CreateRequest;
-import com.tu.employee.model.SearchRequest;
 import com.tu.employee.service.EmployeeService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,8 +47,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/search")
-    List<Employee> findAll(@RequestBody @Valid SearchRequest searchRequest) {
-        return employeeService.findEmployeesByAgeAndTitle(searchRequest.getTitle(), searchRequest.getAge());
+    List<Employee> findAll(
+            @Valid
+            @NotBlank(message = "title can't be null or blank")
+            @RequestParam("title") String title,
+
+            @Valid
+            @NotNull(message = "age can't be null or blank")
+            @Min(value = 18, message = "age should be in between 18 and 100")
+            @Max(value = 100, message = "age should be in between 18 and 100")
+            @RequestParam("age") int age,
+
+            @RequestParam(value = "ignoreCase", required = false) boolean ignoreCase
+            ) {
+        return employeeService.findEmployeesByAgeAndTitle(title, age, ignoreCase);
     }
 
     @DeleteMapping("/{id}")
@@ -57,5 +71,10 @@ public class EmployeeController {
     @DeleteMapping("/all")
     void delete() {
         employeeService.deleteAll();
+    }
+
+    @DeleteMapping("/some")
+    void deleteSome() {
+        employeeService.deleteSome(1);
     }
 }

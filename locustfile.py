@@ -30,6 +30,10 @@ class EmployeeServiceTest(HttpUser):
         self.client.get("/employee/paginated?offset=3&pageSize=10", headers={"Request-Id": str(uuid.uuid4())})
 
     @task
-    def delete_employee(self):
-        self.client.get("/employee/paginated?offset=3&pageSize=10", headers={"Request-Id": str(uuid.uuid4())})
+    def search_employee(self):
+        self.client.get("/employee/search?title=manager&age=30", json={"title": "manager", "age": 30}, headers={"Request-Id": str(uuid.uuid4())})
+#
+#     @task
+#     def delete_some_employee(self):
+#         self.client.delete("/employee/some", headers={"Request-Id": str(uuid.uuid4())})
 

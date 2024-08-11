@@ -17,4 +17,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(nativeQuery = true, value = "SELECT * from employee where date_part('year',age(dob)) >" +
             " :age and title like %:title%")
     List<Employee> findByAgeAndTitle(@Param("title") String title, @Param("age") int age);
+
+    @Query(nativeQuery = true, value = "SELECT * from employee where date_part('year',age(dob)) >" +
+            " :age and UPPER(title) like upper(concat('%',concat(:title, '%')))")
+    List<Employee> findByAgeAndTitleIgnoreCase(@Param("title") String title, @Param("age") int age);
 }
